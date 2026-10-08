@@ -17,6 +17,11 @@ func _ready() -> void:
 
 
 func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
+	if _canvas._project:
+		var project: Project = _canvas._project
+		var page: Page = project.frames[project.current_frame]
+		page.save_history_state()
+
 	_has_last = true
 	_last_pos = _position
 	_place_stamp(_last_pos, _canvas)

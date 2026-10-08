@@ -3,9 +3,12 @@ extends Resource
 
 signal page_update
 
+const MAX_HISTORY_SIZE := 20
+
 @export var layers: Array[Image] = []
 var textures: Array[ImageTexture] = []
 var names: Array[String] = []
+var history: Array = []
 
 
 func _init(w: int = 0, h: int = 0) -> void:
@@ -88,3 +91,39 @@ func insert_layer(idx: int, layer: Image, new_name: String) -> void:
 	textures.insert(idx, ImageTexture.create_from_image(layers[idx]))
 	names.insert(idx, new_name)
 	page_update.emit()
+
+
+## Saves a copy of the current page state for undo.
+func save_history_state() -> void:
+	var state: Array[Image] = []
+
+	for layer in layers:
+		state.append(layer.duplicate())
+
+	history.append(state)
+
+	if history.size() > MAX_HISTORY_SIZE:
+		history.pop_front()
+
+
+## Restores the most recently saved page state.
+func undo() -> bool:
+	if history.is_empty():
+		return false
+
+	var previous_state: Array[Image] = history.pop_back()
+
+	if previous_state.size() != layers.size():
+		return false
+
+	for i in range(previous_state.size()):
+		layers[i] = previous_state[i].duplicate()
+		textures[i].update(layers[i])
+
+	page_update.emit()
+	return true
+
+
+## Returns the number of saved history states.
+func get_history_size() -> int:
+	return history.size()

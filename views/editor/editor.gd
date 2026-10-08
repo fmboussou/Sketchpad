@@ -64,3 +64,11 @@ func _handle_canvas_input(event: InputEvent) -> void:
 		elif event is InputEventMouseMotion:
 			if current_tool is Tool:
 				current_tool.on_pointer_move(canvas_pos, canvas)
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_Z and (event.ctrl_pressed or event.meta_pressed):
+			if project:
+				var page: Page = project.frames[project.current_frame]
+				page.undo()

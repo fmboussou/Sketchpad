@@ -47,3 +47,28 @@ func test_page_texture():
 	assert_not_null(textures[2], "New texture existence")
 	assert_eq(textures[2].get_width(), width, "New width check")
 	assert_eq(textures[2].get_height(), height, "New height check")
+
+
+func test_history_limit():
+	for i in range(25):
+		page.save_history_state()
+
+	assert_eq(page.get_history_size(), 20, "History should contain at most 20 states")
+
+
+func test_undo_restores_previous_state():
+	var original_color = page.layers[0].get_pixel(0, 0)
+
+	page.save_history_state()
+	page.layers[0].set_pixel(0, 0, Color.RED)
+
+	assert_true(page.undo(), "Undo should succeed")
+	assert_eq(
+		page.layers[0].get_pixel(0, 0),
+		original_color,
+		"Undo should restore the previous state"
+	)
+
+
+func test_undo_without_history():
+	assert_false(page.undo(), "Undo should fail when there is no history")

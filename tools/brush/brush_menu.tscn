@@ -1,18 +1,12 @@
 [gd_scene format=3 uid="uid://dm0t60quyv3bj"]
 
 [ext_resource type="Script" uid="uid://dfxrwhc6j411j" path="res://tools/brush/brush_handler.gd" id="1_8f4qj"]
+[ext_resource type="Texture2D" uid="uid://cfk507ghqjsck" path="res://assets/brush_templates/big_circle.png" id="3_circle"]
+[ext_resource type="Texture2D" uid="uid://rhpixg1ij2rv" path="res://assets/brush_templates/big_semi_square.png" id="4_semisq"]
+[ext_resource type="Texture2D" uid="uid://c87yu5hb1kes5" path="res://assets/brush_templates/big_square.png" id="5_square"]
 [ext_resource type="ButtonGroup" uid="uid://df7dnpesedrki" path="res://system/controls/scaling_filter_button_group.tres" id="5_6f1ni"]
 [ext_resource type="PackedScene" uid="uid://b8jaotf7y1i4s" path="res://tools/brush/widgets/thickness_slider.tscn" id="7_bq38f"]
 [ext_resource type="PackedScene" uid="uid://h3fgca6o0i8m" path="res://tools/brush/widgets/hardness_slider.tscn" id="8_4185b"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ddq0e"]
-load_path = "res://.godot/imported/brush_template.png-68412756e71f6707ced911159fe0a315.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a12qn"]
-load_path = "res://.godot/imported/brush_template.png-574c6df2c62338f709eed4cf67e28c62.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hlx8i"]
-load_path = "res://.godot/imported/brush_template.png-c13f6f65589747b58547d2d5b0f184bb.ctex"
 
 [node name="Brush" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "color_picker", "brush_list")]
 script = ExtResource("1_8f4qj")
@@ -42,11 +36,11 @@ layout_mode = 2
 size_flags_vertical = 3
 item_count = 3
 item_0/text = "Big Circle"
-item_0/icon = SubResource("CompressedTexture2D_ddq0e")
+item_0/icon = ExtResource("3_circle")
 item_1/text = "Big Semisquare"
-item_1/icon = SubResource("CompressedTexture2D_a12qn")
+item_1/icon = ExtResource("4_semisq")
 item_2/text = "Big Square"
-item_2/icon = SubResource("CompressedTexture2D_hlx8i")
+item_2/icon = ExtResource("5_square")
 
 [node name="ButtonList" type="HBoxContainer" parent="Main Panel/BrushesHeader" unique_id=297616433]
 layout_mode = 2

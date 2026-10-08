@@ -17,6 +17,7 @@ func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
 
 	var project: Project = _canvas._project
 	var page: Page = project.frames[project.current_frame]
+	page.save_history_state()
 	var layer: Image = page.layers[project.current_layer]
 
 	dragging = true

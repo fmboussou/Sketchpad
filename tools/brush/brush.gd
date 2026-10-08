@@ -17,6 +17,11 @@ func _ready() -> void:
 	stamp_tex = generate_stamp()
 
 func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
+	if _canvas._project:
+		var project: Project = _canvas._project
+		var page: Page = project.frames[project.current_frame]
+		page.save_history_state()
+
 	_stroke_node = Node2D.new()
 	_canvas.dynamic_node.add_child(_stroke_node)
 	_has_last = true
