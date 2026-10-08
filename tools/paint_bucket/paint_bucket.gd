@@ -24,6 +24,8 @@ func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
 	if initial_color == fill_color:
 		return
 
+	current_page.save_history_state()
+
 	var visited: Dictionary = {}
 	var pixels: Array[Vector2i] = [start_pos]
 	while !pixels.is_empty():
